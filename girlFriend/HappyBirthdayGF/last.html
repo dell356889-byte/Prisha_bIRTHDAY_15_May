@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prisha's Birthday Memories</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --rose: #ff4f9a;
+            --coral: #ff7a6b;
+            --lavender: #8b5cf6;
+            --ink: #36264a;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.82) 0 9%, transparent 10%),
+                linear-gradient(135deg, #ffe5ec 0%, #e7f7ff 36%, #fff2d8 70%, #f3e8ff 100%);
+            font-family: 'Quicksand', sans-serif;
+            overflow-x: hidden;
+            color: var(--ink);
+        }
+
+        .magic-sparkles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .magic-sparkles::before,
+        .magic-sparkles::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.95) 1px, transparent 1px);
+            background-size: 52px 52px;
+            animation: sparkleLayer 8s linear infinite;
+            opacity: 0.5;
+        }
+
+        .magic-sparkles::after {
+            animation-delay: -4s;
+            transform: rotate(45deg);
+        }
+
+        .floating-hearts {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(255, 79, 154, 0.62);
+            animation: floatHeart var(--float-duration, 6s) ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+
+        .page-shell {
+            position: relative;
+            z-index: 3;
+            width: min(1160px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: clamp(2.5rem, 6vw, 5rem) 0 3rem;
+        }
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .welcome p {
+            max-width: 760px;
+            margin: 1.1rem auto 0;
+            font-size: clamp(1rem, 2vw, 1.22rem);
+            line-height: 1.8;
+            font-weight: 600;
+            color: #5b486a;
+        }
+
+        .welcome h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(3.2rem, 10vw, 7rem);
+            line-height: 0.9;
+            color: var(--rose);
+            text-shadow: 0 14px 32px rgba(255, 79, 154, 0.18);
+            animation: fadeInScale 1s ease;
+        }
+
+        .memory-container {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: clamp(1rem, 3vw, 1.6rem);
+            margin-top: 2.4rem;
+        }
+
+        .memory-card {
+            min-height: 100%;
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid rgba(255, 255, 255, 0.92);
+            border-radius: 8px;
+            padding: 0.8rem;
+            box-shadow: 0 18px 42px rgba(63, 34, 83, 0.13);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            backdrop-filter: blur(12px);
+        }
+
+        .memory-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 22px 48px rgba(255, 79, 154, 0.2);
+        }
+
+        .memory-img {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            object-position: center 22%;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .memory-title {
+            font-family: 'Dancing Script', cursive;
+            color: var(--rose);
+            font-size: clamp(1.55rem, 3vw, 2rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .memory-caption {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #5b486a;
+            font-weight: 600;
+            padding: 0 0.25rem 0.5rem;
+        }
+
+        .final-message {
+            text-align: center;
+            margin-top: 3rem;
+            padding: clamp(1.8rem, 5vw, 3rem);
+            background: rgba(255, 255, 255, 0.54);
+            border: 1px solid rgba(255, 255, 255, 0.82);
+            border-radius: 8px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 18px 42px rgba(63, 34, 83, 0.1);
+        }
+
+        .final-message h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2.6rem, 8vw, 4.8rem);
+            line-height: 1;
+            color: var(--rose);
+            margin-bottom: 1.2rem;
+            animation: heartbeat 2s infinite;
+        }
+
+        .final-message p {
+            font-size: clamp(1rem, 2vw, 1.18rem);
+            max-width: 780px;
+            margin: 0 auto 1rem;
+            line-height: 1.8;
+            color: #5b486a;
+            font-weight: 600;
+        }
+
+        .goodbye-btn {
+            display: inline-grid;
+            place-items: center;
+            min-height: 54px;
+            padding: 0 1.55rem;
+            margin-top: 0.8rem;
+            font-size: 1.05rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--rose), var(--lavender));
+            color: #fff;
+            border: 0;
+            border-radius: 999px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 14px 28px rgba(255, 79, 154, 0.28);
+        }
+
+        .goodbye-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 18px 34px rgba(255, 79, 154, 0.36);
+        }
+
+        @keyframes sparkleLayer {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-52px);
+            }
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translate(0, 100vh) rotate(0deg);
+            }
+            100% {
+                transform: translate(var(--translate-x, 0), -100vh) rotate(360deg);
+            }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.04);
+            }
+        }
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.92);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 860px) {
+            .memory-container {
+                grid-template-columns: 1fr;
+            }
+
+            .memory-card {
+                width: min(480px, 100%);
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .page-shell {
+                width: min(100% - 22px, 1160px);
+                padding-top: 2rem;
+            }
+
+            .final-message {
+                padding-inline: 1rem;
+            }
+
+            .goodbye-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="magic-sparkles"></div>
+    <div class="floating-hearts">
+        <div class="heart" style="--float-duration: 6s; --delay: 0s; --translate-x: 20px;">💝</div>
+        <div class="heart" style="--float-duration: 8s; --delay: 1s; --translate-x: -30px;">💖</div>
+        <div class="heart" style="--float-duration: 7s; --delay: 2s; --translate-x: 40px;">💗</div>
+        <div class="heart" style="--float-duration: 9s; --delay: 3s; --translate-x: -20px;">💓</div>
+        <div class="heart" style="--float-duration: 5s; --delay: 4s; --translate-x: 30px;">💕</div>
+    </div>
+
+    <main class="page-shell">
+        <section class="welcome">
+            <h1>For Prisha,</h1>
+            <p>Every picture here feels like a small reason to smile. On 15 May, I just want you to feel how loved, special, and unforgettable you are.</p>
+        </section>
+
+        <section class="memory-container" aria-label="Prisha memories">
+            <article class="memory-card">
+                <img src="d1.jpeg" alt="Prisha smiling" class="memory-img">
+                <h2 class="memory-title">Her Smile</h2>
+                <p class="memory-caption">The kind of smile that makes everything softer, warmer, and better in a second.</p>
+            </article>
+
+            <article class="memory-card">
+                <img src="d2.jpeg" alt="Prisha in a beautiful moment" class="memory-img">
+                <h2 class="memory-title">Her Glow</h2>
+                <p class="memory-caption">Prisha, you carry a light that makes ordinary moments feel like something worth remembering.</p>
+            </article>
+
+            <article class="memory-card">
+                <img src="d3.jpeg" alt="Prisha birthday memory" class="memory-img">
+                <h2 class="memory-title">Her Heart</h2>
+                <p class="memory-caption">Beautiful, caring, and impossible not to adore. That is my Prisha, today and always.</p>
+            </article>
+        </section>
+
+        <section class="final-message">
+            <h2>Happy Birthday, Prisha</h2>
+            <p>May 15 bring you laughter, love, surprises, and the kind of happiness that stays with you long after the candles are blown out.</p>
+            <p>I am lucky to call you my girlfriend, and even luckier to celebrate you.</p>
+            <a href="index.html" class="goodbye-btn">Back to Countdown</a>
+        </section>
+    </main>
+</body>
+</html>

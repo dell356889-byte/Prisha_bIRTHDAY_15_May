@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prisha Birthday Countdown</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cursor"></div>
+    <main class="birthday-page">
+        <section class="hero-copy" aria-label="Birthday countdown for Prisha">
+            <p class="eyebrow">15 May is almost here</p>
+            <h1>Happy Birthday, Prisha</h1>
+            <p class="greeting"></p>
+
+            <div class="countdown" aria-label="Countdown to Prisha's birthday">
+                <div class="time-card">
+                    <span id="days">00</span>
+                    <small>Days</small>
+                </div>
+                <div class="time-card">
+                    <span id="hours">00</span>
+                    <small>Hours</small>
+                </div>
+                <div class="time-card">
+                    <span id="seconds">00</span>
+                    <small>Seconds</small>
+                </div>
+            </div>
+
+            <p class="birthday-date">Birthday: 15 May</p>
+            <button class="cta-button" type="button">Enter Prisha's World</button>
+        </section>
+
+        <section class="photo-stage" aria-label="Prisha photos">
+            <figure class="photo-card photo-card-main">
+                <img src="d1.jpeg" alt="Prisha smiling">
+            </figure>
+            <figure class="photo-card photo-card-top">
+                <img src="d2.jpeg" alt="Prisha portrait">
+            </figure>
+            <figure class="photo-card photo-card-bottom">
+                <img src="d3.jpeg" alt="Beautiful moment of Prisha">
+            </figure>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

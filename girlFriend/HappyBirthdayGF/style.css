@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none;
+}
+
+:root {
+    --rose: #ff4f9a;
+    --coral: #ff7a6b;
+    --lavender: #8b5cf6;
+    --ink: #36264a;
+    --paper: rgba(255, 255, 255, 0.74);
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Quicksand', Arial, sans-serif;
+    color: var(--ink);
+    overflow-x: hidden;
+    background:
+        radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.9) 0 12%, transparent 13%),
+        linear-gradient(135deg, #ffe5ec 0%, #e7f7ff 34%, #fff2d8 66%, #f4e9ff 100%);
+}
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    inset: auto;
+    width: 240px;
+    height: 240px;
+    pointer-events: none;
+    background-image:
+        radial-gradient(circle, rgba(255, 79, 154, 0.22) 0 3px, transparent 4px),
+        radial-gradient(circle, rgba(139, 92, 246, 0.18) 0 2px, transparent 3px);
+    background-size: 38px 38px, 52px 52px;
+    filter: blur(0.2px);
+    animation: driftPattern 18s linear infinite;
+}
+
+body::before {
+    top: 5%;
+    right: 3%;
+}
+
+body::after {
+    left: 4%;
+    bottom: 2%;
+    animation-direction: reverse;
+}
+
+.cursor {
+    width: 18px;
+    height: 18px;
+    background: var(--rose);
+    border: 2px solid #fff;
+    border-radius: 50%;
+    position: fixed;
+    z-index: 20;
+    pointer-events: none;
+    box-shadow: 0 0 22px rgba(255, 79, 154, 0.45);
+    transform: translate(-50%, -50%);
+}
+
+.birthday-page {
+    position: relative;
+    z-index: 1;
+    width: min(1180px, calc(100% - 32px));
+    min-height: 100vh;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.82fr);
+    align-items: center;
+    gap: clamp(2rem, 6vw, 5rem);
+    padding: 36px 0;
+}
+
+.hero-copy {
+    display: grid;
+    gap: 1.35rem;
+    align-content: center;
+}
+
+.eyebrow {
+    width: fit-content;
+    padding: 0.45rem 0.8rem;
+    border-radius: 999px;
+    color: #7c2d12;
+    background: rgba(255, 244, 214, 0.9);
+    border: 1px solid rgba(255, 122, 107, 0.24);
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0;
+}
+
+h1 {
+    max-width: 780px;
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(3.4rem, 9vw, 6.6rem);
+    line-height: 0.9;
+    color: var(--rose);
+    text-shadow: 0 10px 28px rgba(255, 79, 154, 0.18);
+    opacity: 0;
+}
+
+.greeting {
+    max-width: 660px;
+    min-height: 4rem;
+    color: #5c476d;
+    font-size: clamp(1.05rem, 2vw, 1.45rem);
+    line-height: 1.6;
+    font-weight: 600;
+}
+
+.countdown {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(92px, 150px));
+    gap: 0.8rem;
+    margin-top: 0.35rem;
+}
+
+.time-card {
+    min-height: 104px;
+    padding: 1rem 0.75rem;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background: var(--paper);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 16px 36px rgba(114, 67, 137, 0.16);
+    backdrop-filter: blur(12px);
+}
+
+.time-card span {
+    font-size: clamp(2.1rem, 6vw, 3.9rem);
+    font-weight: 700;
+    color: var(--lavender);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.time-card small {
+    margin-top: 0.45rem;
+    font-size: 0.84rem;
+    color: #7b6688;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0;
+}
+
+.birthday-date {
+    color: #7a4f60;
+    font-weight: 700;
+}
+
+.cta-button {
+    width: fit-content;
+    min-height: 54px;
+    padding: 0 1.45rem;
+    font-size: 1rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--rose), var(--coral));
+    border: 0;
+    border-radius: 999px;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 16px 30px rgba(255, 79, 154, 0.28);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    opacity: 0;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 20px 38px rgba(255, 79, 154, 0.36);
+}
+
+.photo-stage {
+    position: relative;
+    min-height: 660px;
+}
+
+.photo-card {
+    position: absolute;
+    overflow: hidden;
+    border: 10px solid rgba(255, 255, 255, 0.92);
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 24px 55px rgba(63, 34, 83, 0.22);
+}
+
+.photo-card img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center 22%;
+}
+
+.photo-card-main {
+    top: 50%;
+    right: 9%;
+    width: min(72%, 360px);
+    aspect-ratio: 3 / 4;
+    transform: translateY(-50%) rotate(2deg);
+}
+
+.photo-card-top,
+.photo-card-bottom {
+    width: min(48%, 238px);
+    aspect-ratio: 4 / 5;
+}
+
+.photo-card-top {
+    top: 4%;
+    left: 0;
+    transform: rotate(-9deg);
+}
+
+.photo-card-bottom {
+    right: 0;
+    bottom: 0;
+    transform: rotate(8deg);
+}
+
+.floating {
+    position: fixed;
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0;
+}
+
+@keyframes driftPattern {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-36px);
+    }
+}
+
+@media (max-width: 880px) {
+    * {
+        cursor: auto;
+    }
+
+    .cursor {
+        display: none;
+    }
+
+    .birthday-page {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding: 28px 0 46px;
+    }
+
+    .photo-stage {
+        min-height: 460px;
+        order: -1;
+    }
+
+    .photo-card-main {
+        width: min(68%, 320px);
+        right: 12%;
+    }
+
+    .photo-card-top,
+    .photo-card-bottom {
+        width: min(43%, 190px);
+    }
+}
+
+@media (max-width: 560px) {
+    .birthday-page {
+        width: min(100% - 22px, 1180px);
+    }
+
+    .countdown {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .time-card {
+        min-height: 92px;
+        border-radius: 14px;
+        padding: 0.75rem 0.4rem;
+    }
+
+    .time-card small {
+        font-size: 0.72rem;
+    }
+
+    .photo-stage {
+        min-height: 390px;
+    }
+
+.photo-card {
+        border-width: 7px;
+        border-radius: 8px;
+    }
+
+    .greeting {
+        min-height: 5.8rem;
+    }
+
+    .cta-button {
+        width: 100%;
+    }
+}
